@@ -1,5 +1,7 @@
 const News = require('../models').News;
 
+
+
 const getPagination = (page, size) => {
     const limit = size ? +size : 3;
     const offset = page ? page * limit : 0;
@@ -8,17 +10,17 @@ const getPagination = (page, size) => {
 };
 
 const getPagingData = (data, page, limit) => {
-    const { count: totalItems, rows: tutorials } = data;
+    const { count: totalItems, rows: news } = data;
     const currentPage = page ? +page : 0;
     const totalPages = Math.ceil(totalItems / limit);
 
-    return { totalItems, tutorials, totalPages, currentPage };
+    return { totalItems, news, totalPages, currentPage };
 };
 
 module.exports = {
     findAll(req, res) {
         const { page, size, title } = req.query;
-        var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+        var condition = title ? news_title  : null;
 
         const { limit, offset } = getPagination(page, size);
 
